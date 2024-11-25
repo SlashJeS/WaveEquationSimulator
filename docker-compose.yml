@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  backend:
+    build:
+      context: ./b_lab3_backend
+      dockerfile: Dockerfile
+    container_name: fastapi_backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./b_lab3_backend:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+
+  frontend:
+    build:
+      context: ./b_lab3_frontend
+      dockerfile: Dockerfile
+    container_name: react_frontend
+    ports:
+      - "4848:4848"
+    volumes:
+      - ./b_lab3_frontend:/app
+      - /app/node_modules
+    command: npm start
