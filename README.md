@@ -1,176 +1,176 @@
 
-# Проект: Симуляция волнового уравнения
+# Project: Wave Equation Simulation
 
-Этот проект реализует симуляцию волнового уравнения с использованием бэкенда на FastAPI и фронтенда на React (с Material-UI).
+This project implements a wave equation simulation using a FastAPI backend and a React frontend (with Material-UI).
 
 ---
 
-## **1. Общее руководство по запуску проекта**
+## **1. General Instructions for Running the Project**
 
-### 1.1. Требования
-- Убедитесь, что на вашем компьютере установлены:
+### 1.1. Requirements
+- Ensure the following are installed on your system:
   - Docker
   - Docker Compose
 
-### 1.2. Запуск всего проекта
+### 1.2. Running the Entire Project
 
-1. Склонируйте репозиторий:
+1. Clone the repository:
    ```bash
-   git clone <URL вашего репозитория>
-   cd <название папки проекта>
+   git clone <repository URL>
+   cd <project folder>
    ```
 
-2. Запустите `docker-compose`:
+2. Start the project using `docker-compose`:
    ```bash
    docker-compose up --build
    ```
 
-3. Откройте в браузере:
-   - Бэкенд (документация API): [http://localhost:8000/docs](http://localhost:8000/docs)
-   - Фронтенд (веб-приложение): [http://localhost:3000](http://localhost:3000)
+3. Open in your browser:
+   - Backend (API documentation): [http://localhost:8000/docs](http://localhost:8000/docs)
+   - Frontend (web application): [http://localhost:3000](http://localhost:3000)
 
-4. Чтобы остановить проект:
+4. To stop the project:
    ```bash
    docker-compose down
    ```
 
 ---
 
-## **2. Запуск компонентов по отдельности**
+## **2. Running Components Individually**
 
-Если требуется запустить только бэкенд или только фронтенд, выполните следующие шаги:
+If you need to run only the backend or the frontend, follow these steps:
 
 ---
 
-### **2.1. Бэкенд (FastAPI)**
+### **2.1. Backend (FastAPI)**
 
-#### 2.1.1. Запуск бэкенда локально (без Docker)
+#### 2.1.1. Running Backend Locally (Without Docker)
 
-1. Перейдите в папку `backend`:
+1. Navigate to the `backend` folder:
    ```bash
    cd backend
    ```
 
-2. Создайте виртуальное окружение:
+2. Create a virtual environment:
    ```bash
    python -m venv .venv
    ```
 
-3. Активируйте виртуальное окружение:
-   - Для **Linux/Mac**:
+3. Activate the virtual environment:
+   - For **Linux/Mac**:
      ```bash
      source .venv/bin/activate
      ```
-   - Для **Windows**:
+   - For **Windows**:
      ```bash
      .\.venv\Scripts\activate
      ```
 
-4. Установите зависимости:
+4. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
 
-5. Запустите сервер:
+5. Start the server:
    ```bash
    uvicorn main:app --reload
    ```
 
-6. Откройте в браузере документацию API: [http://localhost:8000/docs](http://localhost:8000/docs)
+6. Open API documentation in your browser: [http://localhost:8000/docs](http://localhost:8000/docs)
 
-#### 2.1.2. Запуск бэкенда в Docker
+#### 2.1.2. Running Backend in Docker
 
-1. Перейдите в папку `backend`:
+1. Navigate to the `backend` folder:
    ```bash
    cd backend
    ```
 
-2. Соберите Docker-образ:
+2. Build the Docker image:
    ```bash
    docker build -t fastapi-backend .
    ```
 
-3. Запустите контейнер:
+3. Run the container:
    ```bash
    docker run -d -p 8000:8000 --name fastapi_backend fastapi-backend
    ```
 
-4. Откройте в браузере документацию API: [http://localhost:8000/docs](http://localhost:8000/docs)
+4. Open API documentation in your browser: [http://localhost:8000/docs](http://localhost:8000/docs)
 
 ---
 
-### **2.2. Фронтенд (React)**
+### **2.2. Frontend (React)**
 
-#### 2.2.1. Запуск фронтенда локально (без Docker)
+#### 2.2.1. Running Frontend Locally (Without Docker)
 
-1. Перейдите в папку `frontend`:
+1. Navigate to the `frontend` folder:
    ```bash
    cd frontend
    ```
 
-2. Убедитесь, что установлен Node.js. Установите зависимости:
+2. Ensure Node.js is installed. Install dependencies:
    ```bash
    npm install
    ```
 
-3. Запустите фронтенд:
+3. Start the frontend:
    ```bash
    npm start
    ```
 
-4. Откройте веб-приложение в браузере: [http://localhost:3000](http://localhost:3000)
+4. Open the web application in your browser: [http://localhost:3000](http://localhost:3000)
 
-#### 2.2.2. Запуск фронтенда в Docker
+#### 2.2.2. Running Frontend in Docker
 
-1. Перейдите в папку `frontend`:
+1. Navigate to the `frontend` folder:
    ```bash
    cd frontend
    ```
 
-2. Соберите Docker-образ:
+2. Build the Docker image:
    ```bash
    docker build -t react-frontend .
    ```
 
-3. Запустите контейнер:
+3. Run the container:
    ```bash
    docker run -d -p 3000:3000 --name react_frontend react-frontend
    ```
 
-4. Откройте веб-приложение в браузере: [http://localhost:3000](http://localhost:3000)
+4. Open the web application in your browser: [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## **3. Структура проекта**
+## **3. Project Structure**
 
 ```
 root
-├── b_lab3_backend
-│   ├── main.py              # Основной код бэкенда
-│   ├── requirements.txt     # Зависимости для Python
-│   └── Dockerfile           # Dockerfile для бэкенда
-├── b_lab3_frontend
+├── backend
+│   ├── main.py              # Backend core code
+│   ├── requirements.txt     # Python dependencies
+│   └── Dockerfile           # Dockerfile for backend
+├── frontend
 │   ├── src
-│   │   ├── components       # Компоненты React
+│   │   ├── components       # React components
 │   │   │   ├── ParameterForm.tsx
 │   │   │   ├── GraphDisplay.tsx
 │   │   │   ├── ResultsDisplay.tsx
-│   │   ├── App.tsx          # Основной компонент приложения
-│   ├── package.json         # Зависимости фронтенда
-│   └── Dockerfile           # Dockerfile для фронтенда
-├── docker-compose.yml        # Файл для запуска проекта через Docker Compose
-└── README.md                 # Документация
+│   │   ├── App.tsx          # Main application component
+│   ├── package.json         # Frontend dependencies
+│   └── Dockerfile           # Dockerfile for frontend
+├── docker-compose.yml        # File to run the project using Docker Compose
+└── README.md                 # Documentation
 ```
 
 ---
 
-## **4. Завершение работы**
+## **4. Shutting Down**
 
-Если вы запускали проект через Docker Compose, остановить все контейнеры можно командой:
+If you started the project with Docker Compose, stop all containers with:
 ```bash
 docker-compose down
 ```
-Если вы запускали компоненты по отдельности через Docker, используйте:
+If you started components individually with Docker, use:
 ```bash
 docker stop <container_name>
 docker rm <container_name>
@@ -178,6 +178,6 @@ docker rm <container_name>
 
 ---
 
-## **5. Вопросы и поддержка**
+## **5. Questions and Support**
 
-Если возникли вопросы или проблемы с запуском, создайте issue в репозитории или свяжитесь с разработчиком.
+For questions or issues, create an issue in the repository or contact the developer.

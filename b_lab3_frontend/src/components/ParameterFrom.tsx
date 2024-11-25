@@ -4,16 +4,33 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import TimelineIcon from '@mui/icons-material/Timeline';
 
 const ParameterForm: React.FC<{ onSubmit: (params: any) => void }> = ({ onSubmit }) => {
-    const [c, setC] = useState(1.0); // Wave speed
-    const [xMin, setXMin] = useState(0);
-    const [xMax, setXMax] = useState(10);
-    const [tMax, setTMax] = useState(5);
-    const [nx, setNx] = useState(100);
-    const [nt, setNt] = useState(200);
+    const [c, setC] = useState<string>("1.0");
+    const [xMin, setXMin] = useState<string>("0.0");
+    const [xMax, setXMax] = useState<string>("10.0");
+    const [tMax, setTMax] = useState<string>("5.0");
+    const [nx, setNx] = useState<string>("100");
+    const [nt, setNt] = useState<string>("200");
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        onSubmit({ c, x_min: xMin, x_max: xMax, t_max: tMax, nx, nt });
+        onSubmit({
+            c: parseFloat(c),
+            x_min: parseFloat(xMin),
+            x_max: parseFloat(xMax),
+            t_max: parseFloat(tMax),
+            nx: parseFloat(nx),
+            nt: parseFloat(nt),
+        });
+    };
+
+    const handleInputChange = (
+        setValue: React.Dispatch<React.SetStateAction<string>>
+    ) => (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        // Allow empty input or valid float values (including `.` for incomplete inputs)
+        if (!isNaN(Number(value)) || value === "." || value === "") {
+            setValue(value);
+        }
     };
 
     return (
@@ -35,9 +52,8 @@ const ParameterForm: React.FC<{ onSubmit: (params: any) => void }> = ({ onSubmit
                             <TextField
                                 label="Wave Speed (C)"
                                 helperText="Speed of wave propagation"
-                                type="number"
                                 value={c}
-                                onChange={(e) => setC(parseFloat(e.target.value))}
+                                onChange={handleInputChange(setC)}
                                 fullWidth
                                 variant="outlined"
                             />
@@ -46,9 +62,8 @@ const ParameterForm: React.FC<{ onSubmit: (params: any) => void }> = ({ onSubmit
                             <TextField
                                 label="Minimum Space (x_min)"
                                 helperText="Start of the spatial domain"
-                                type="number"
                                 value={xMin}
-                                onChange={(e) => setXMin(parseFloat(e.target.value))}
+                                onChange={handleInputChange(setXMin)}
                                 fullWidth
                                 variant="outlined"
                             />
@@ -57,9 +72,8 @@ const ParameterForm: React.FC<{ onSubmit: (params: any) => void }> = ({ onSubmit
                             <TextField
                                 label="Maximum Space (x_max)"
                                 helperText="End of the spatial domain"
-                                type="number"
                                 value={xMax}
-                                onChange={(e) => setXMax(parseFloat(e.target.value))}
+                                onChange={handleInputChange(setXMax)}
                                 fullWidth
                                 variant="outlined"
                             />
@@ -68,9 +82,8 @@ const ParameterForm: React.FC<{ onSubmit: (params: any) => void }> = ({ onSubmit
                             <TextField
                                 label="Maximum Time (t_max)"
                                 helperText="Duration of simulation"
-                                type="number"
                                 value={tMax}
-                                onChange={(e) => setTMax(parseFloat(e.target.value))}
+                                onChange={handleInputChange(setTMax)}
                                 fullWidth
                                 variant="outlined"
                             />
@@ -87,9 +100,8 @@ const ParameterForm: React.FC<{ onSubmit: (params: any) => void }> = ({ onSubmit
                             <TextField
                                 label="Grid Points in Space (nx)"
                                 helperText="Number of grid divisions in space"
-                                type="number"
                                 value={nx}
-                                onChange={(e) => setNx(parseInt(e.target.value))}
+                                onChange={handleInputChange(setNx)}
                                 fullWidth
                                 variant="outlined"
                             />
@@ -98,9 +110,8 @@ const ParameterForm: React.FC<{ onSubmit: (params: any) => void }> = ({ onSubmit
                             <TextField
                                 label="Grid Points in Time (nt)"
                                 helperText="Number of grid divisions in time"
-                                type="number"
                                 value={nt}
-                                onChange={(e) => setNt(parseInt(e.target.value))}
+                                onChange={handleInputChange(setNt)}
                                 fullWidth
                                 variant="outlined"
                             />
