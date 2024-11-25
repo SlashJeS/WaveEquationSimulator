@@ -70,6 +70,8 @@ async def simulate(params: SimulationInputParams):
                 )
             u[n + 1, :] = u_next
 
+        accuracy = np.linalg.norm(u[-1, :])
+
         # Graph generation
         buf_initial = io.BytesIO()
         plt.figure()
@@ -120,6 +122,7 @@ async def simulate(params: SimulationInputParams):
             },
             "stability_condition": bool(c2_dt2_dx2 <= 1),
             "unique_solution": bool(np.all(np.isfinite(u))),
+            "accuracy": accuracy,
         }
 
     except Exception as e:

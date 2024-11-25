@@ -2,11 +2,12 @@ import React from 'react';
 import { Typography, Box } from '@mui/material';
 
 interface ResultsProps {
+    accuracy: number | null;
     stabilityCondition: boolean;
     uniqueSolution: boolean;
 }
 
-const ResultsDisplay: React.FC<ResultsProps> = ({ stabilityCondition, uniqueSolution }) => {
+const ResultsDisplay: React.FC<ResultsProps> = ({ accuracy, stabilityCondition, uniqueSolution }) => {
     return (
         <Box 
             sx={{
@@ -24,6 +25,11 @@ const ResultsDisplay: React.FC<ResultsProps> = ({ stabilityCondition, uniqueSolu
             >
                 Simulation Results
             </Typography>
+            {accuracy !== null && (
+                <Typography variant="body1" component="div">
+                    <strong>Accuracy:</strong> {accuracy.toFixed(4)}
+                </Typography>
+            )}
             <Typography variant="body1" component="div">
                 <strong>Stability Condition:</strong> {stabilityCondition ? 'Satisfied' : 'Violated'}
             </Typography>
